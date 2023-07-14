@@ -9,17 +9,19 @@ const cookieParser = require("cookie-parser");
 const multer = require("multer");
 const uploadMiddleware = multer({ dest: "uploads/" });
 const salt = bcrypt.genSaltSync(10);
+const dotenv = require("dotenv");
 const fs = require("fs");
 const secret = "thisasecret";
 const app = express();
 
+dotenv.config({ path: "../var/.env" });
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
 mongoose.connect(
-  "mongodb+srv://blog:EJu1xNdj9sIl1fXu@blog-page.gzqcw6k.mongodb.net/?retryWrites=true&w=majority"
+  `mongodb+srv://blog:${process.env.DB_USERNAME}@blog-page.gzqcw6k.mongodb.net/?retryWrites=true&w=majority`
 );
 
 app.get("/profile", (req, res) => {
