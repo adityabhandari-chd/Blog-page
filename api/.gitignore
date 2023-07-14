@@ -44,7 +44,7 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
-/var
+var/
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
